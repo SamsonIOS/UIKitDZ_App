@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 /// Экран с выбранными продуктами для покупки
 final class BasketViewController: UIViewController {
 

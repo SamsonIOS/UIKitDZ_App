@@ -6,11 +6,12 @@
 //
 
 import UIKit
+
 /// Информация о товаре
 final class InformationItemViewController: UIViewController {
     
     // MARK: Public properties
-    let nameOfItem: UILabel = {
+    let nameOfItemLabel: UILabel = {
         var label = UILabel(frame: CGRect(
             x: 20,
             y: 110,
@@ -21,7 +22,7 @@ final class InformationItemViewController: UIViewController {
         return label
     }()
     
-     let photoOfItemImage: UIImageView = {
+     let photoOfItemImageView: UIImageView = {
         var imageView = UIImageView(frame: CGRect(
             x: 50,
             y: 200,
@@ -40,7 +41,7 @@ final class InformationItemViewController: UIViewController {
     // MARK: Private Methods
     private func setView() {
         view.backgroundColor = .black
-        view.addSubview(nameOfItem)
-        view.addSubview(photoOfItemImage)
+        view.addSubview(nameOfItemLabel)
+        view.addSubview(photoOfItemImageView)
     }
 }

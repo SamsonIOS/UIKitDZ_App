@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 /// Экран с рекомендациями для пользователя
 final class ForUsViewController: UIViewController {
 

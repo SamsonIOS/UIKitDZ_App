@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 /// Экран с поиском товара
 final class SearchViewController: UIViewController {
     
@@ -17,7 +18,7 @@ final class SearchViewController: UIViewController {
         return search
     }()
     
-    private let recentlyViewedTextField: UILabel = {
+    private let recentlyViewedLabel: UILabel = {
         var label = UILabel(frame: CGRect(
             x: 10,
             y: 240,
@@ -289,7 +290,7 @@ final class SearchViewController: UIViewController {
         navigationItem.searchController = searchControll
         definesPresentationContext = true
         
-        view.addSubview(recentlyViewedTextField)
+        view.addSubview(recentlyViewedLabel)
         view.addSubview(clearLabel)
         
         view.addSubview(caseForLaptopView)
@@ -328,14 +329,14 @@ final class SearchViewController: UIViewController {
         let infoVC = InformationItemViewController()
         switch sender.view?.tag {
         case 0:
-            infoVC.nameOfItem.text = textCaseLabel.text
-            infoVC.photoOfItemImage.image = UIImage(named: "Image")
+            infoVC.nameOfItemLabel.text = textCaseLabel.text
+            infoVC.photoOfItemImageView.image = UIImage(named: "Image")
         case 1:
-            infoVC.nameOfItem.text = textSportLabel.text
-            infoVC.photoOfItemImage.image = UIImage(named: "4")
+            infoVC.nameOfItemLabel.text = textSportLabel.text
+            infoVC.photoOfItemImageView.image = UIImage(named: "4")
         case 2:
-            infoVC.nameOfItem.text = textLeatherLabel.text
-            infoVC.photoOfItemImage.image = UIImage(named: "2")
+            infoVC.nameOfItemLabel.text = textLeatherLabel.text
+            infoVC.photoOfItemImageView.image = UIImage(named: "2")
         default:
             break
         }

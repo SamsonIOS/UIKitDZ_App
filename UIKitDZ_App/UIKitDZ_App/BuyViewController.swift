@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 /// Экран для совершения покупок
 final class BuyViewController: UIViewController {
 
