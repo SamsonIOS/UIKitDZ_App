@@ -74,6 +74,7 @@ final class SearchViewController: UIViewController {
             height: 180))
         view.backgroundColor = UIColor(red: 28.0/255, green: 28.0/255, blue: 30.0/255, alpha: 1.0)
         view.layer.cornerRadius = 20
+        view.tag = 2
         view.clipsToBounds = true
         return view
     }()
@@ -85,6 +86,7 @@ final class SearchViewController: UIViewController {
             width: 110,
             height: 80))
         caseImage.image = Contants.caseImage
+        caseImage.contentMode = .scaleAspectFit
         return caseImage
     }()
     
@@ -102,10 +104,11 @@ final class SearchViewController: UIViewController {
     private let leatherImageView: UIImageView = {
         var caseImage = UIImageView(frame: CGRect(
             x: 20,
-            y: 20,
-            width: 110,
-            height: 80))
+            y: 5,
+            width: 120,
+            height: 120))
         caseImage.image = Contants.leatherImage
+        caseImage.contentMode = .scaleAspectFit
         return caseImage
     }()
     
@@ -273,9 +276,11 @@ final class SearchViewController: UIViewController {
     private func setGesture() {
         caseForLaptopView.isUserInteractionEnabled = true
         sportItemView.isUserInteractionEnabled = true
-
+        leatherCaseView.isUserInteractionEnabled = true
+        
         caseForLaptopView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(_:))))
         sportItemView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(_:))))
+        leatherCaseView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(_:))))
     }
     
     private func setElementsOnView() {
@@ -314,6 +319,10 @@ final class SearchViewController: UIViewController {
         view.addSubview(lupaModelPhoneImage)
     }
     
+    internal func updateSearchResults(for searchControll: UISearchController) {
+        
+    }
+    
     // MARK: @Objc private action
     @objc private func imageTap(_ sender: UITapGestureRecognizer) {
         let infoVC = InformationItemViewController()
@@ -324,6 +333,9 @@ final class SearchViewController: UIViewController {
         case 1:
             infoVC.nameOfItem.text = textSportLabel.text
             infoVC.photoOfItemImage.image = UIImage(named: "4")
+        case 2:
+            infoVC.nameOfItem.text = textLeatherLabel.text
+            infoVC.photoOfItemImage.image = UIImage(named: "2")
         default:
             break
         }
@@ -333,14 +345,10 @@ final class SearchViewController: UIViewController {
 
 // MARK: Extension - UISearchResultsUpdating
 extension SearchViewController: UISearchResultsUpdating {
-    
     enum Contants {
         static let magnifyingglassImage = UIImage(systemName: "magnifyingglass")
         static let caseImage = UIImage(named: "Image")
         static let sportImage = UIImage(named: "4")
-        static let leatherImage = UIImage(named: "caseBrown2")
-    }
-    
-    func updateSearchResults(for searchControll: UISearchController) {
+        static let leatherImage = UIImage(named: "2")
     }
 }

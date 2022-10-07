@@ -27,6 +27,7 @@ final class InformationItemViewController: UIViewController {
             y: 200,
             width: 300,
             height: 200))
+         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
