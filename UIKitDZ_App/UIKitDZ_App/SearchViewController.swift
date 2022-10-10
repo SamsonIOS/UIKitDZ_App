@@ -22,6 +22,8 @@ final class SearchViewController: UIViewController {
         static let queryAppleCareText = "AppleCare"
         static let queryBeatsText = "Beats"
         static let queryIphoneModelText = "Сравните модели iPhone"
+        static let caseImage = UIImage(named: "Image")
+        static let sportImage = UIImage(named: "4")
         static let airPodsImage = UIImage(named: "airpodsImage")
         static let priceForCaseLaptop = "3 990.00 руб."
         static let priceForSportCase = "4 590.00 руб."
