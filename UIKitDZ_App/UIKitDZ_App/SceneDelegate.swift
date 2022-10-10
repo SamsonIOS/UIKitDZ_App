@@ -42,7 +42,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             tabBarVC.tabBar.backgroundColor = UIColor(red: 18.0/255, green: 18.0/255, blue: 18.0/255, alpha: 1.0)
             
-            searchNavVC.navigationBar.prefersLargeTitles = true
             searchNavVC.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             
             tabBarVC.tabBar.tintColor = .systemBlue
