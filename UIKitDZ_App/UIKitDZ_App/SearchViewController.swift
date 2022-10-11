@@ -11,27 +11,13 @@ import UIKit
 final class SearchViewController: UIViewController {
     
     // MARK: Constants
-    enum Constants {
+    private enum Constants {
         static let magnifyingglassImage = UIImage(systemName: "magnifyingglass")
-        static let forCaseLaptopText = "Чехол Incase Flat для MacBook Pro 16 дюймов"
-        static let forSportClockText = "Спортивный ремешок Black Unity"
-        static let forLeatherCaseText = "Кожаный Чехол Incase Flat для MacBook Pro 16 дюймов"
-        static let forAirPodsText = "Наушники Air Pods Pro v2.0"
         static let queryOptionsText = "Варианты запросов"
         static let queryAirPodsText = "AirPods"
         static let queryAppleCareText = "AppleCare"
         static let queryBeatsText = "Beats"
         static let queryIphoneModelText = "Сравните модели iPhone"
-        static let caseImage = UIImage(named: "Image")
-        static let sportImage = UIImage(named: "4")
-        static let airPodsImage = UIImage(named: "airpodsImage")
-        static let priceForCaseLaptop = "3 990.00 руб."
-        static let priceForSportCase = "4 590.00 руб."
-        static let priceForLeatherCase = "2 990.00 руб."
-        static let priceForAirPods = "12 990.00 руб."
-        static let forLaptopCaseImage = ["Image", "case2", "case3"]
-        static let forSportClockImage = ["4", "clock2"]
-        static let forLeatherCaseImage = ["2", "caseBrown2", "caseBrown3"]
         static let recentlyViewedLabelText = "Недавно просмотренные"
         static let clearlLabelText = "Очистить"
     }
@@ -57,154 +43,6 @@ final class SearchViewController: UIViewController {
             height: 30))
         label.text = Constants.clearlLabelText
         label.textColor = .systemBlue
-        return label
-    }()
-    
-    private let caseForLaptopView: UIView = {
-        var view = UIView(frame: CGRect(
-            x: 10,
-            y: 0,
-            width: 150,
-            height: 180))
-        view.backgroundColor = UIColor(red: 28.0/255, green: 28.0/255, blue: 30.0/255, alpha: 1.0)
-        view.layer.cornerRadius = 20
-        view.clipsToBounds = true
-        view.tag = 0
-        return view
-    }()
-    
-    private let sportItemView: UIView = {
-        var view = UIView(frame: CGRect(
-            x: 170,
-            y: 0,
-            width: 150,
-            height: 180))
-        view.backgroundColor = UIColor(red: 28.0/255, green: 28.0/255, blue: 30.0/255, alpha: 1.0)
-        view.layer.cornerRadius = 20
-        view.clipsToBounds = true
-        view.tag = 1
-        return view
-    }()
-    
-    private let leatherCaseView: UIView = {
-        var view = UIView(frame: CGRect(
-            x: 330,
-            y: 0,
-            width: 150,
-            height: 180))
-        view.backgroundColor = UIColor(red: 28.0/255, green: 28.0/255, blue: 30.0/255, alpha: 1.0)
-        view.layer.cornerRadius = 20
-        view.tag = 2
-        view.clipsToBounds = true
-        return view
-    }()
-    
-    private let airPodsView: UIView = {
-        var view = UIView(frame: CGRect(
-            x: 490,
-            y: 0,
-            width: 150,
-            height: 180))
-        view.backgroundColor = UIColor(red: 28.0/255, green: 28.0/255, blue: 30.0/255, alpha: 1.0)
-        view.layer.cornerRadius = 20
-        view.tag = 3
-        view.clipsToBounds = true
-        return view
-    }()
-    
-    private let caseImageView: UIImageView = {
-        var caseImage = UIImageView(frame: CGRect(
-            x: 20,
-            y: 20,
-            width: 110,
-            height: 80))
-        caseImage.image = Constants.caseImage
-        caseImage.contentMode = .scaleAspectFit
-        return caseImage
-    }()
-    
-    private let sportImageView: UIImageView = {
-        var caseImage = UIImageView(frame: CGRect(
-            x: 20,
-            y: 20,
-            width: 110,
-            height: 80))
-        caseImage.image = Constants.sportImage
-        caseImage.contentMode = .scaleAspectFit
-        return caseImage
-    }()
-    
-    private let leatherImageView: UIImageView = {
-        var caseImage = UIImageView(frame: CGRect(
-            x: 15,
-            y: 5,
-            width: 120,
-            height: 120))
-        caseImage.image = UIImage(named: Constants.forLeatherCaseImage[0])
-        caseImage.contentMode = .scaleAspectFit
-        return caseImage
-    }()
-    
-    private let airPodsImageView: UIImageView = { //
-        var caseImage = UIImageView(frame: CGRect(
-            x: 15,
-            y: 5,
-            width: 120,
-            height: 120))
-        caseImage.image = Constants.airPodsImage
-        caseImage.contentMode = .scaleAspectFit
-        return caseImage
-    }()
-    
-    private let textCaseLabel: UILabel = {
-        var label = UILabel(frame: CGRect(
-            x: 8,
-            y: 105,
-            width: 120,
-            height: 80))
-        label.text = Constants.forCaseLaptopText
-        label.numberOfLines = 3
-        label.textColor = .white
-        label.font = .boldSystemFont(ofSize: 13)
-        return label
-    }()
-    
-    private let textSportLabel: UILabel = {
-        var label = UILabel(frame: CGRect(
-            x: 8,
-            y: 105,
-            width: 120,
-            height: 80))
-        label.text = Constants.forSportClockText
-        label.numberOfLines = 3
-        label.textColor = .white
-        label.font = .boldSystemFont(ofSize: 13)
-        return label
-    }()
-    
-    private let textLeatherLabel: UILabel = {
-        var label = UILabel(frame: CGRect(
-            x: 8,
-            y: 105,
-            width: 120,
-            height: 80))
-        label.text = Constants.forLeatherCaseText
-        label.numberOfLines = 3
-        label.textColor = .white
-        label.font = .boldSystemFont(ofSize: 13)
-        return label
-    }()
-    
-    private let textAirPodsLabel: UILabel = {
-        var label = UILabel(frame: CGRect(
-            x: 8,
-            y: 105,
-            width: 120,
-            height: 80))
-        label.text = Constants.forAirPodsText
-        label.numberOfLines = 3
-        label.textColor = .white
-        label.font = .boldSystemFont(ofSize: 13)
         return label
     }()
     
@@ -317,12 +155,8 @@ final class SearchViewController: UIViewController {
     }()
     
     private lazy var itemScrollView: UIScrollView = {
-        var scroll = UIScrollView(frame: CGRect(x: 0, y: 300, width: self.view.bounds.width, height: 190))
+        var scroll = UIScrollView(frame: CGRect(x: 0, y: 300, width: self.view.bounds.width, height: 210))
         scroll.contentSize = CGSize(width: 660, height: 120)
-        scroll.addSubview(caseForLaptopView)
-        scroll.addSubview(sportItemView)
-        scroll.addSubview(leatherCaseView)
-        scroll.addSubview(airPodsView)
         return scroll
     }()
     
@@ -333,15 +167,36 @@ final class SearchViewController: UIViewController {
         return search
     }()
     
-    // MARK: Life cycle didLoad
+    private var viewFrame = 13
+    
+    private var tag = 0
+    
+    private var product = [
+        Product(
+            name: "Чехол Incase Flat для MacBook Pro 16 дюймов",
+            imageNames: ["Image", "case2", "case3"],
+            price: "3 990.00 руб."),
+        Product(
+            name: "Спортивный ремешок Black Unity",
+            imageNames: ["4", "clock2"],
+            price: "4 590.00 руб."),
+        Product(
+            name: "Кожаный Чехол Incase Flat для MacBook Pro 16 дюймов",
+            imageNames: ["2", "caseBrown2", "caseBrown3"],
+            price: "2 990.00 руб."),
+        Product(
+            name: "Наушники Air Pods Pro v2.0",
+            imageNames: ["airpodsImage"],
+            price: "12 990.00 руб.")
+    ]
+    
+    // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
         setElementsOnView()
-        setGesture()
     }
-    
-    // MARK: Life cycle willApear
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavBarColor(with: UIColor.black)
@@ -352,7 +207,42 @@ final class SearchViewController: UIViewController {
     private func setView() {
         title = "Поиск"
         view.backgroundColor = .black
+        addView()
     }
+    
+    private func addView() {
+            for item in product {
+                createProductView(image: item.imageNames.first ?? "", info: item.name, cost: item.price, tag: tag)
+                tag += 1
+            }
+        }
+    
+    private func createProductView(image: String, info: String, cost: String, tag: Int) {
+            let productView = UIView()
+            productView.backgroundColor = UIColor(red: 28.0/255, green: 28.0/255, blue: 30.0/255, alpha: 1.0)
+            productView.frame = CGRect(x: viewFrame, y: 0, width: 150, height: 200)
+            productView.layer.cornerRadius = 15
+            
+            let label = UILabel()
+            label.text = info
+            label.textColor = .white
+            label.numberOfLines = 3
+            label.font = .boldSystemFont(ofSize: 13)
+            label.frame = CGRect(x: 13, y: 115, width: 130, height: 80)
+            
+            let productImageView = UIImageView()
+            let productImage = UIImage(named: image)
+            productImageView.contentMode = .scaleAspectFit
+            productImageView.image = productImage
+            productImageView.frame = CGRect(x: 23, y: 25, width: 100, height: 100)
+            
+            productView.addSubview(productImageView)
+            productView.addSubview(label)
+            productView.tag = tag
+            productView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(_:))))
+            viewFrame += 165
+            itemScrollView.addSubview(productView)
+        }
     
     private func setupNavBarColor(with color: UIColor) {
         let navBarAppearance = UINavigationBarAppearance()
@@ -364,18 +254,6 @@ final class SearchViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
     }
     
-    private func setGesture() {
-        caseForLaptopView.isUserInteractionEnabled = true
-        sportItemView.isUserInteractionEnabled = true
-        leatherCaseView.isUserInteractionEnabled = true
-        airPodsView.isUserInteractionEnabled = true
-        
-        caseForLaptopView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(_:))))
-        sportItemView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(_:))))
-        leatherCaseView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(_:))))
-        airPodsView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(_:))))
-    }
-    
     private func setElementsOnView() {
         searchControll.searchResultsUpdater = self
         navigationItem.searchController = searchControll
@@ -383,22 +261,6 @@ final class SearchViewController: UIViewController {
         
         view.addSubview(recentlyViewedLabel)
         view.addSubview(clearLabel)
-        
-        view.addSubview(caseForLaptopView)
-        caseForLaptopView.addSubview(caseImageView)
-        caseForLaptopView.addSubview(textCaseLabel)
-        
-        view.addSubview(sportItemView)
-        sportItemView.addSubview(sportImageView)
-        sportItemView.addSubview(textSportLabel)
-        
-        view.addSubview(leatherCaseView)
-        leatherCaseView.addSubview(leatherImageView)
-        leatherCaseView.addSubview(textLeatherLabel)
-        
-        view.addSubview(airPodsView)
-        airPodsView.addSubview(airPodsImageView)
-        airPodsView.addSubview(textAirPodsLabel)
         
         view.addSubview(queryOptions)
         
@@ -419,37 +281,9 @@ final class SearchViewController: UIViewController {
     // MARK: @Objc private action
     @objc private func imageTap(_ sender: UITapGestureRecognizer) {
         let infoVC = InformationItemViewController()
-        switch sender.view?.tag {
-        case 0:
-            infoVC.nameOfItemLabel.text = textCaseLabel.text
-            infoVC.afterScrollViewLabel.text = textCaseLabel.text
-            infoVC.firstItemImageView.image = UIImage(named: Constants.forLaptopCaseImage[0])
-            infoVC.secondItemImageView.image = UIImage(named: Constants.forLaptopCaseImage[1])
-            infoVC.threedItemImageView.image = UIImage(named: Constants.forLaptopCaseImage[2])
-            infoVC.priceOfItem.text = Constants.priceForCaseLaptop
-            infoVC.counter = Constants.forLaptopCaseImage.count
-        case 1:
-            infoVC.nameOfItemLabel.text = textSportLabel.text
-            infoVC.afterScrollViewLabel.text = textSportLabel.text
-            infoVC.nameOfItemLabel.text = textSportLabel.text
-            infoVC.firstItemImageView.image = UIImage(named: Constants.forSportClockImage[0])
-            infoVC.secondItemImageView.image = UIImage(named: Constants.forSportClockImage[1])
-            infoVC.priceOfItem.text = Constants.priceForSportCase
-            infoVC.counter = Constants.forSportClockImage.count
-        case 2:
-            infoVC.nameOfItemLabel.text = textLeatherLabel.text
-            infoVC.firstItemImageView.image = UIImage(named: Constants.forLeatherCaseImage[0])
-            infoVC.secondItemImageView.image = UIImage(named: Constants.forLeatherCaseImage[1])
-            infoVC.threedItemImageView.image = UIImage(named: Constants.forLeatherCaseImage[2])
-            infoVC.priceOfItem.text = Constants.priceForLeatherCase
-            infoVC.counter = Constants.forLeatherCaseImage.count
-        case 3:
-            infoVC.nameOfItemLabel.text = textAirPodsLabel.text
-            infoVC.priceOfItem.text = Constants.priceForAirPods
-            infoVC.firstItemImageView.image = UIImage(named: "airpodsImage")
-        default:
-            break
-        }
+        guard let tag = sender.view?.tag else { return }
+        infoVC.product = product[tag]
+        infoVC.counter = product[tag].imageNames.count
         navigationController?.pushViewController(infoVC, animated: true)
     }
 }

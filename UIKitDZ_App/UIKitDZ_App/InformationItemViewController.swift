@@ -11,7 +11,7 @@ import UIKit
 final class InformationItemViewController: UIViewController {
     
     // MARK: Constants
-    enum Constants {
+    private enum Constants {
         static let compatibilityTextLabel = "Совместимо с MacBook Pro - Евгений"
         static let firstInfoLabel = "Заказ сегодня в течении для, доставка:"
         static let secondsInfoLabel = "Чт 25 фев - Бесплатно"
@@ -74,6 +74,8 @@ final class InformationItemViewController: UIViewController {
     
     var counter = Int()
     
+    var product: Product?
+    
     // MARK: Private properties
     private let compatibilityLabel: UILabel = {
         var label = UILabel(frame: CGRect(
@@ -82,7 +84,7 @@ final class InformationItemViewController: UIViewController {
         label.textColor = .systemGray
         label.textAlignment = .center
         label.text = Constants.compatibilityTextLabel
-        label.labelColorChange(For:
+        label.labelColorChange(for:
                                 Constants.compatibilityTextLabel as NSString,
                                into: .systemBlue,
                                from: 13,
@@ -143,19 +145,6 @@ final class InformationItemViewController: UIViewController {
         return button
     }()
     
-    private lazy var photoScroll: UIScrollView = {
-        var scroll = UIScrollView(frame: CGRect(
-            x: 0, y: 200, width: self.view.bounds.width, height: 213))
-        scroll.contentSize = CGSize(width: Int(self.view.bounds.width) * counter, height: 200)
-        scroll.isPagingEnabled = true
-        scroll.indicatorStyle = .white
-        scroll.showsHorizontalScrollIndicator = true
-        scroll.addSubview(firstItemImageView)
-        scroll.addSubview(secondItemImageView)
-        scroll.addSubview(threedItemImageView)
-        return scroll
-    }()
-    
     private lazy var whiteButton: UIButton = {
         var button = UIButton(frame: CGRect(
             x: 160, y: 500, width: 40, height: 40))
@@ -199,32 +188,22 @@ final class InformationItemViewController: UIViewController {
         return button
     }()
     
+    private var photoScroll = UIScrollView()
+    
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
-        addRightButtons()
-        setupNavigationBarColor(with: UIColor(red: 22.0/255, green: 18.0/255, blue: 22.0/255, alpha: 1.0))
     }
     
     // MARK: Private Methods
-    private func setupNavigationBarColor(with color: UIColor) {
-        navigationController?.navigationBar.prefersLargeTitles = false
-        let navigationBarAppreance = UINavigationBarAppearance()
-        navigationBarAppreance.configureWithOpaqueBackground()
-        navigationBarAppreance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationBarAppreance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationBarAppreance.backgroundColor = color
-        navigationController?.navigationBar.standardAppearance = navigationBarAppreance
-        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppreance
-    }
-    
     private func setView() {
+        setupNavigationBarColor(with: UIColor(red: 22.0 / 255, green: 18.0 / 255, blue: 22.0 / 255, alpha: 1.0))
+        
         view.backgroundColor = .black
         view.addSubview(nameOfItemLabel)
         view.addSubview(priceOfItem)
         priceOfItem.center.x = view.center.x
-        view.addSubview(photoScroll)
         
         view.addSubview(whiteButton)
         view.addSubview(darkGrayButton)
@@ -244,6 +223,54 @@ final class InformationItemViewController: UIViewController {
         view.addSubview(boxImageView)
         view.addSubview(checkStatus)
         
+        addRightButtons()
+        setScrollViewElements()
+    }
+    
+    private func setScrollViewElements() {
+        nameOfItemLabel.text = product?.name
+        afterScrollViewLabel.text = product?.name
+        priceOfItem.text = product?.price
+        createScrollView()
+        guard let product = product else { return }
+        for imageName in product.imageNames {
+            addNewImageView(imageName: imageName)
+        }
+        photoScroll.indicatorStyle = .white
+    }
+    
+    private func createScrollView() {
+        photoScroll = UIScrollView(frame: CGRect(
+            x: 0, y: 200, width: self.view.bounds.width, height: 200))
+        photoScroll.isPagingEnabled = true
+        photoScroll.contentSize = CGSize(width: Int(view.bounds.width) * counter, height: 200)
+        photoScroll.contentMode = .scaleAspectFit
+        view.addSubview(photoScroll)
+    }
+    
+    private func addNewImageView(imageName: String) {
+        var imageViewRect = CGRect(x: 0, y: 0, width: view.bounds.width, height: 190)
+        imageViewRect.origin.x = imageViewRect.size.width * CGFloat(photoScroll.subviews.count)
+        let imageView = newImageViewWithImage(paramImage: imageName, paramFrame: imageViewRect)
+        photoScroll.addSubview(imageView)
+    }
+    
+    private func newImageViewWithImage(paramImage: String, paramFrame: CGRect) -> UIImageView {
+        let result = UIImageView(frame: paramFrame)
+        result.contentMode = .scaleAspectFit
+        result.image = UIImage(named: paramImage)
+        return result
+    }
+    
+    private func setupNavigationBarColor(with color: UIColor) {
+        navigationController?.navigationBar.prefersLargeTitles = false
+        let navigationBarAppreance = UINavigationBarAppearance()
+        navigationBarAppreance.configureWithOpaqueBackground()
+        navigationBarAppreance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationBarAppreance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationBarAppreance.backgroundColor = color
+        navigationController?.navigationBar.standardAppearance = navigationBarAppreance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppreance
     }
     
     private func addRightButtons() {
@@ -275,7 +302,7 @@ final class InformationItemViewController: UIViewController {
 
 // MARK: Extension + UILabel
 extension UILabel {
-    func labelColorChange(For givenText: NSString,
+    func labelColorChange(for givenText: NSString,
                           into color: UIColor,
                           from locationNumber: Int,
                           to length: Int) {
