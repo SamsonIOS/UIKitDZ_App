@@ -13,6 +13,7 @@
 		3349833128EDD63E00942AE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3349832F28EDD63E00942AE5 /* Main.storyboard */; };
 		3349833328EDD63F00942AE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3349833228EDD63F00942AE5 /* Assets.xcassets */; };
 		3349833628EDD63F00942AE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3349833428EDD63F00942AE5 /* LaunchScreen.storyboard */; };
+		338FAAB728F5946A00073B92 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338FAAB628F5946A00073B92 /* Product.swift */; };
 		33A8C61528EF4AA40010ECC7 /* InformationItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8C61428EF4AA40010ECC7 /* InformationItemViewController.swift */; };
 		33CD1ED628EEE08100447723 /* ForUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CD1ED528EEE08100447723 /* ForUsViewController.swift */; };
 		33CD1ED828EEE09500447723 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CD1ED728EEE09500447723 /* SearchViewController.swift */; };
@@ -28,6 +29,7 @@
 		3349833228EDD63F00942AE5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3349833528EDD63F00942AE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3349833728EDD63F00942AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		338FAAB628F5946A00073B92 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		33A8C61428EF4AA40010ECC7 /* InformationItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationItemViewController.swift; sourceTree = "<group>"; };
 		33CD1ED528EEE08100447723 /* ForUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForUsViewController.swift; sourceTree = "<group>"; };
 		33CD1ED728EEE09500447723 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -48,6 +50,7 @@
 		3349831D28EDD63D00942AE5 = {
 			isa = PBXGroup;
 			children = (
+				338FAAB628F5946A00073B92 /* Product.swift */,
 				3349832828EDD63E00942AE5 /* UIKitDZ_App */,
 				3349832728EDD63E00942AE5 /* Products */,
 			);
@@ -181,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33CD1EDA28EEE0A500447723 /* BasketViewController.swift in Sources */,
+				338FAAB728F5946A00073B92 /* Product.swift in Sources */,
 				33A8C61528EF4AA40010ECC7 /* InformationItemViewController.swift in Sources */,
 				33CD1ED828EEE09500447723 /* SearchViewController.swift in Sources */,
 				3349832E28EDD63E00942AE5 /* BuyViewController.swift in Sources */,

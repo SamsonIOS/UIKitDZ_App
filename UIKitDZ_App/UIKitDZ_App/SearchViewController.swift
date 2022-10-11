@@ -10,21 +10,26 @@ import UIKit
 /// Экран с поиском товара
 final class SearchViewController: UIViewController {
     
-    // MARK: Private properties
-    private var searchControll: UISearchController = {
-        let search = UISearchController(searchResultsController: nil)
-        search.obscuresBackgroundDuringPresentation = false
-        search.searchBar.placeholder = "Приложение"
-        return search
-    }()
+    // MARK: Constants
+    private enum Constants {
+        static let magnifyingglassImage = UIImage(systemName: "magnifyingglass")
+        static let queryOptionsText = "Варианты запросов"
+        static let queryAirPodsText = "AirPods"
+        static let queryAppleCareText = "AppleCare"
+        static let queryBeatsText = "Beats"
+        static let queryIphoneModelText = "Сравните модели iPhone"
+        static let recentlyViewedLabelText = "Недавно просмотренные"
+        static let clearlLabelText = "Очистить"
+    }
     
+    // MARK: Private properties
     private let recentlyViewedLabel: UILabel = {
         var label = UILabel(frame: CGRect(
             x: 10,
             y: 240,
             width: 300,
             height: 30))
-        label.text = "Недавно просмотренные"
+        label.text = Constants.recentlyViewedLabelText
         label.textColor = .white
         label.font = .boldSystemFont(ofSize: 22)
         return label
@@ -36,119 +41,8 @@ final class SearchViewController: UIViewController {
             y: 242,
             width: 170,
             height: 30))
-        label.text = "Очистить"
+        label.text = Constants.clearlLabelText
         label.textColor = .systemBlue
-        return label
-    }()
-    
-    private let caseForLaptopView: UIView = {
-        var view = UIView(frame: CGRect(
-            x: 10,
-            y: 300,
-            width: 150,
-            height: 180))
-        view.backgroundColor = UIColor(red: 28.0/255, green: 28.0/255, blue: 30.0/255, alpha: 1.0)
-        view.layer.cornerRadius = 20
-        view.clipsToBounds = true
-        view.tag = 0
-        return view
-    }()
-    
-    private let sportItemView: UIView = {
-        var view = UIView(frame: CGRect(
-            x: 170,
-            y: 300,
-            width: 150,
-            height: 180))
-        view.backgroundColor = UIColor(red: 28.0/255, green: 28.0/255, blue: 30.0/255, alpha: 1.0)
-        view.layer.cornerRadius = 20
-        view.clipsToBounds = true
-        view.tag = 1
-        return view
-    }()
-     
-    private let leatherCaseView: UIView = {
-        var view = UIView(frame: CGRect(
-            x: 330,
-            y: 300,
-            width: 150,
-            height: 180))
-        view.backgroundColor = UIColor(red: 28.0/255, green: 28.0/255, blue: 30.0/255, alpha: 1.0)
-        view.layer.cornerRadius = 20
-        view.tag = 2
-        view.clipsToBounds = true
-        return view
-    }()
-    
-    private let caseImageView: UIImageView = {
-        var caseImage = UIImageView(frame: CGRect(
-            x: 20,
-            y: 20,
-            width: 110,
-            height: 80))
-        caseImage.image = Contants.caseImage
-        caseImage.contentMode = .scaleAspectFit
-        return caseImage
-    }()
-    
-    private let sportImageView: UIImageView = {
-        var caseImage = UIImageView(frame: CGRect(
-            x: 20,
-            y: 20,
-            width: 110,
-            height: 80))
-        caseImage.image = Contants.sportImage
-        caseImage.contentMode = .scaleAspectFit
-        return caseImage
-    }()
-    
-    private let leatherImageView: UIImageView = {
-        var caseImage = UIImageView(frame: CGRect(
-            x: 20,
-            y: 5,
-            width: 120,
-            height: 120))
-        caseImage.image = Contants.leatherImage
-        caseImage.contentMode = .scaleAspectFit
-        return caseImage
-    }()
-    
-    private let textCaseLabel: UILabel = {
-        var label = UILabel(frame: CGRect(
-            x: 8,
-            y: 105,
-            width: 120,
-            height: 80))
-        label.text = "Чехол Incase Flat для MacBook Pro 16 дюймов"
-        label.numberOfLines = 3
-        label.textColor = .white
-        label.font = .boldSystemFont(ofSize: 13)
-        return label
-    }()
-    
-    private let textSportLabel: UILabel = {
-        var label = UILabel(frame: CGRect(
-            x: 8,
-            y: 105,
-            width: 120,
-            height: 80))
-        label.text = "Спортивный ремешок Black Unity"
-        label.numberOfLines = 3
-        label.textColor = .white
-        label.font = .boldSystemFont(ofSize: 13)
-        return label
-    }()
-    
-    private let textLeatherLabel: UILabel = {
-        var label = UILabel(frame: CGRect(
-            x: 8,
-            y: 105,
-            width: 120,
-            height: 80))
-        label.text = "Кожаный Чехол Incase Flat для MacBook Pro 16 дюймов"
-        label.numberOfLines = 3
-        label.textColor = .white
-        label.font = .boldSystemFont(ofSize: 13)
         return label
     }()
     
@@ -158,7 +52,7 @@ final class SearchViewController: UIViewController {
             y: 530,
             width: 300,
             height: 30))
-        label.text = "Варианты запросов"
+        label.text = Constants.queryOptionsText
         label.font = .boldSystemFont(ofSize: 22)
         label.textColor = .white
         return label
@@ -170,7 +64,7 @@ final class SearchViewController: UIViewController {
             y: 580,
             width: 150,
             height: 30))
-        label.text = "AirPods"
+        label.text = Constants.queryAirPodsText
         label.textColor = .white
         label.font = .boldSystemFont(ofSize: 19)
         return label
@@ -182,7 +76,7 @@ final class SearchViewController: UIViewController {
             y: 585,
             width: 18,
             height: 18))
-        imageView.image = Contants.magnifyingglassImage
+        imageView.image = Constants.magnifyingglassImage
         imageView.tintColor = .systemGray
         imageView.contentMode = .scaleAspectFit
         return imageView
@@ -194,7 +88,7 @@ final class SearchViewController: UIViewController {
             y: 630,
             width: 150,
             height: 30))
-        label.text = "AppleCare"
+        label.text = Constants.queryAppleCareText
         label.textColor = .white
         label.font = .boldSystemFont(ofSize: 19)
         return label
@@ -206,7 +100,7 @@ final class SearchViewController: UIViewController {
             y: 635,
             width: 18,
             height: 18))
-        imageView.image = Contants.magnifyingglassImage
+        imageView.image = Constants.magnifyingglassImage
         imageView.tintColor = .systemGray
         imageView.contentMode = .scaleAspectFit
         return imageView
@@ -218,7 +112,7 @@ final class SearchViewController: UIViewController {
             y: 680,
             width: 150,
             height: 30))
-        label.text = "Beats"
+        label.text = Constants.queryBeatsText
         label.textColor = .white
         label.font = .boldSystemFont(ofSize: 19)
         return label
@@ -230,7 +124,7 @@ final class SearchViewController: UIViewController {
             y: 685,
             width: 18,
             height: 18))
-        imageView.image = Contants.magnifyingglassImage
+        imageView.image = Constants.magnifyingglassImage
         imageView.tintColor = .systemGray
         imageView.contentMode = .scaleAspectFit
         return imageView
@@ -242,7 +136,7 @@ final class SearchViewController: UIViewController {
             y: 730,
             width: 250,
             height: 30))
-        label.text = "Сравните модели iPhone"
+        label.text = Constants.queryIphoneModelText
         label.textColor = .white
         label.font = .boldSystemFont(ofSize: 19)
         return label
@@ -254,56 +148,119 @@ final class SearchViewController: UIViewController {
             y: 735,
             width: 18,
             height: 18))
-        imageView.image = Contants.magnifyingglassImage
+        imageView.image = Constants.magnifyingglassImage
         imageView.tintColor = .systemGray
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
+    
+    private lazy var itemScrollView: UIScrollView = {
+        var scroll = UIScrollView(frame: CGRect(x: 0, y: 300, width: self.view.bounds.width, height: 210))
+        scroll.contentSize = CGSize(width: 660, height: 120)
+        return scroll
+    }()
+    
+    private var searchControll: UISearchController = {
+        let search = UISearchController(searchResultsController: nil)
+        search.obscuresBackgroundDuringPresentation = false
+        search.searchBar.placeholder = "Приложение"
+        return search
+    }()
+    
+    private var viewFrame = 13
+    
+    private var tag = 0
+    
+    private var product = [
+        Product(
+            name: "Чехол Incase Flat для MacBook Pro 16 дюймов",
+            imageNames: ["Image", "case2", "case3"],
+            price: "3 990.00 руб."),
+        Product(
+            name: "Спортивный ремешок Black Unity",
+            imageNames: ["4", "clock2"],
+            price: "4 590.00 руб."),
+        Product(
+            name: "Кожаный Чехол Incase Flat для MacBook Pro 16 дюймов",
+            imageNames: ["2", "caseBrown2", "caseBrown3"],
+            price: "2 990.00 руб."),
+        Product(
+            name: "Наушники Air Pods Pro v2.0",
+            imageNames: ["airpodsImage"],
+            price: "12 990.00 руб.")
+    ]
     
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
         setElementsOnView()
-        setGesture()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavBarColor(with: UIColor.black)
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     // MARK: Private Methods
     private func setView() {
         title = "Поиск"
         view.backgroundColor = .black
+        addView()
     }
     
-    private func setGesture() {
-        caseForLaptopView.isUserInteractionEnabled = true
-        sportItemView.isUserInteractionEnabled = true
-        leatherCaseView.isUserInteractionEnabled = true
-        
-        caseForLaptopView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(_:))))
-        sportItemView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(_:))))
-        leatherCaseView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(_:))))
+    private func addView() {
+            for item in product {
+                createProductView(image: item.imageNames.first ?? "", info: item.name, cost: item.price, tag: tag)
+                tag += 1
+            }
+        }
+    
+    private func createProductView(image: String, info: String, cost: String, tag: Int) {
+            let productView = UIView()
+            productView.backgroundColor = UIColor(red: 28.0/255, green: 28.0/255, blue: 30.0/255, alpha: 1.0)
+            productView.frame = CGRect(x: viewFrame, y: 0, width: 150, height: 200)
+            productView.layer.cornerRadius = 15
+            
+            let label = UILabel()
+            label.text = info
+            label.textColor = .white
+            label.numberOfLines = 3
+            label.font = .boldSystemFont(ofSize: 13)
+            label.frame = CGRect(x: 13, y: 115, width: 130, height: 80)
+            
+            let productImageView = UIImageView()
+            let productImage = UIImage(named: image)
+            productImageView.contentMode = .scaleAspectFit
+            productImageView.image = productImage
+            productImageView.frame = CGRect(x: 23, y: 25, width: 100, height: 100)
+            
+            productView.addSubview(productImageView)
+            productView.addSubview(label)
+            productView.tag = tag
+            productView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(_:))))
+            viewFrame += 165
+            itemScrollView.addSubview(productView)
+        }
+    
+    private func setupNavBarColor(with color: UIColor) {
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.backgroundColor = color
+        navigationController?.navigationBar.standardAppearance = navBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
     }
     
     private func setElementsOnView() {
-    
         searchControll.searchResultsUpdater = self
         navigationItem.searchController = searchControll
         definesPresentationContext = true
         
         view.addSubview(recentlyViewedLabel)
         view.addSubview(clearLabel)
-        
-        view.addSubview(caseForLaptopView)
-        caseForLaptopView.addSubview(caseImageView)
-        caseForLaptopView.addSubview(textCaseLabel)
-        
-        view.addSubview(sportItemView)
-        sportItemView.addSubview(sportImageView)
-        sportItemView.addSubview(textSportLabel)
-        
-        view.addSubview(leatherCaseView)
-        leatherCaseView.addSubview(leatherImageView)
-        leatherCaseView.addSubview(textLeatherLabel)
         
         view.addSubview(queryOptions)
         
@@ -318,38 +275,21 @@ final class SearchViewController: UIViewController {
         
         view.addSubview(modelIphoneLabel)
         view.addSubview(lupaModelPhoneImage)
-    }
-    
-    internal func updateSearchResults(for searchControll: UISearchController) {
-        
+        view.addSubview(itemScrollView)
     }
     
     // MARK: @Objc private action
     @objc private func imageTap(_ sender: UITapGestureRecognizer) {
         let infoVC = InformationItemViewController()
-        switch sender.view?.tag {
-        case 0:
-            infoVC.nameOfItemLabel.text = textCaseLabel.text
-            infoVC.photoOfItemImageView.image = UIImage(named: "Image")
-        case 1:
-            infoVC.nameOfItemLabel.text = textSportLabel.text
-            infoVC.photoOfItemImageView.image = UIImage(named: "4")
-        case 2:
-            infoVC.nameOfItemLabel.text = textLeatherLabel.text
-            infoVC.photoOfItemImageView.image = UIImage(named: "2")
-        default:
-            break
-        }
+        guard let tag = sender.view?.tag else { return }
+        infoVC.product = product[tag]
+        infoVC.counter = product[tag].imageNames.count
         navigationController?.pushViewController(infoVC, animated: true)
     }
 }
 
 // MARK: Extension - UISearchResultsUpdating
 extension SearchViewController: UISearchResultsUpdating {
-    enum Contants {
-        static let magnifyingglassImage = UIImage(systemName: "magnifyingglass")
-        static let caseImage = UIImage(named: "Image")
-        static let sportImage = UIImage(named: "4")
-        static let leatherImage = UIImage(named: "2")
+    internal func updateSearchResults(for searchControll: UISearchController) {
     }
 }
