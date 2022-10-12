@@ -211,11 +211,12 @@ final class SearchViewController: UIViewController {
     }
     
     private func addView() {
-            for item in product {
-                createProductView(image: item.imageNames.first ?? "", info: item.name, cost: item.price, tag: tag)
-                tag += 1
-            }
+        for item in product {
+            createProductView(image: item.imageNames.first ?? "", info: item.name, cost: item.price, tag: tag)
+            print(tag)
+            tag += 1
         }
+    }
     
     private func createProductView(image: String, info: String, cost: String, tag: Int) {
             let productView = UIView()
@@ -239,7 +240,9 @@ final class SearchViewController: UIViewController {
             productView.addSubview(productImageView)
             productView.addSubview(label)
             productView.tag = tag
-            productView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(_:))))
+        productView.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(imageTap(sender: ))))
             viewFrame += 165
             itemScrollView.addSubview(productView)
         }
@@ -279,11 +282,13 @@ final class SearchViewController: UIViewController {
     }
     
     // MARK: @Objc private action
-    @objc private func imageTap(_ sender: UITapGestureRecognizer) {
+    @objc private func imageTap(sender: UITapGestureRecognizer) {
         let infoVC = InformationItemViewController()
         guard let tag = sender.view?.tag else { return }
         infoVC.product = product[tag]
-        infoVC.counter = product[tag].imageNames.count
+        infoVC.photoScroll.tag = tag
+        print(product[tag].imageNames.count)
+       // infoVC.photoScroll.tag =
         navigationController?.pushViewController(infoVC, animated: true)
     }
 }

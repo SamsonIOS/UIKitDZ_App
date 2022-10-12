@@ -42,27 +42,6 @@ final class InformationItemViewController: UIViewController {
         return label
     }()
     
-    let firstItemImageView: UIImageView = {
-        var imageView = UIImageView(frame: CGRect(
-            x: 60, y: 0, width: 300, height: 200))
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    let secondItemImageView: UIImageView = {
-        var imageView = UIImageView(frame: CGRect(
-            x: 470, y: 0, width: 300, height: 200))
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    let threedItemImageView: UIImageView = {
-        var imageView = UIImageView(frame: CGRect(
-            x: 880, y: 0, width: 300, height: 200))
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
     let afterScrollViewLabel: UILabel = {
         var label = UILabel(frame: CGRect(
             x: 0, y: 450, width: 300, height: 30))
@@ -188,7 +167,17 @@ final class InformationItemViewController: UIViewController {
         return button
     }()
     
-    private var photoScroll = UIScrollView()
+    lazy var photoScroll: UIScrollView = {
+        let scroll = UIScrollView(frame: CGRect(
+            x: 0, y: 200, width: self.view.bounds.width, height: 200))
+        scroll.contentSize = CGSize(
+            width: Int(self.view.bounds.width) * (self.product?.imageNames.count ?? 0),
+            height: 200)
+        scroll.isPagingEnabled = true
+        scroll.contentMode = .scaleAspectFit
+        scroll.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnImageView)))
+        return scroll
+    }()
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -196,12 +185,17 @@ final class InformationItemViewController: UIViewController {
         setView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBarColor(with: UIColor(red: 22.0 / 255, green: 18.0 / 255, blue: 22.0 / 255, alpha: 1.0))
+    }
+    
     // MARK: Private Methods
     private func setView() {
-        setupNavigationBarColor(with: UIColor(red: 22.0 / 255, green: 18.0 / 255, blue: 22.0 / 255, alpha: 1.0))
-        
-        view.backgroundColor = .black
+        setScrollViewElements()
         view.addSubview(nameOfItemLabel)
+        view.backgroundColor = .black
+        
         view.addSubview(priceOfItem)
         priceOfItem.center.x = view.center.x
         
@@ -222,30 +216,20 @@ final class InformationItemViewController: UIViewController {
         view.addSubview(thirdTextLabel)
         view.addSubview(boxImageView)
         view.addSubview(checkStatus)
-        
+        view.addSubview(photoScroll)
         addRightButtons()
-        setScrollViewElements()
     }
     
     private func setScrollViewElements() {
         nameOfItemLabel.text = product?.name
         afterScrollViewLabel.text = product?.name
         priceOfItem.text = product?.price
-        createScrollView()
+        
         guard let product = product else { return }
         for imageName in product.imageNames {
             addNewImageView(imageName: imageName)
+            
         }
-        photoScroll.indicatorStyle = .white
-    }
-    
-    private func createScrollView() {
-        photoScroll = UIScrollView(frame: CGRect(
-            x: 0, y: 200, width: self.view.bounds.width, height: 200))
-        photoScroll.isPagingEnabled = true
-        photoScroll.contentSize = CGSize(width: Int(view.bounds.width) * counter, height: 200)
-        photoScroll.contentMode = .scaleAspectFit
-        view.addSubview(photoScroll)
     }
     
     private func addNewImageView(imageName: String) {
@@ -259,6 +243,7 @@ final class InformationItemViewController: UIViewController {
         let result = UIImageView(frame: paramFrame)
         result.contentMode = .scaleAspectFit
         result.image = UIImage(named: paramImage)
+        
         return result
     }
     
@@ -297,6 +282,25 @@ final class InformationItemViewController: UIViewController {
         default:
             break
         }
+    }
+    
+    @objc private func tapOnImageView(sender: UITapGestureRecognizer) {
+        let newVC = WebViewController()
+        switch photoScroll.tag {
+        case 0:
+            newVC.url = "https://re-store.ru/catalog/P057-106-13/"
+        case 1:
+            newVC.url = "https://re-store.ru/catalog/MJ4V3ZM-A/"
+        case 2:
+            newVC.url = "https://re-store.ru/catalog/NM7MDT0M00/"
+        case 3:
+            newVC.url = "https://re-store.ru/catalog/MLWK3/"
+        default:
+            newVC.url = "https://re-store.ru"
+        }
+        let navVC = UINavigationController(rootViewController: newVC)
+        navVC.navigationController?.modalPresentationStyle = .fullScreen
+        present(navVC, animated: true)
     }
 }
 
