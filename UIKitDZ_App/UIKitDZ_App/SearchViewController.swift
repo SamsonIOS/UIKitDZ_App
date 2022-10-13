@@ -10,7 +10,7 @@ import UIKit
 /// Экран с поиском товара
 final class SearchViewController: UIViewController {
     
-    // MARK: Constants
+    // MARK: Visual Components
     private enum Constants {
         static let magnifyingglassImage = UIImage(systemName: "magnifyingglass")
         static let queryOptionsText = "Варианты запросов"
@@ -213,7 +213,6 @@ final class SearchViewController: UIViewController {
     private func addView() {
         for item in product {
             createProductView(image: item.imageNames.first ?? "", info: item.name, cost: item.price, tag: tag)
-            print(tag)
             tag += 1
         }
     }
@@ -287,8 +286,6 @@ final class SearchViewController: UIViewController {
         guard let tag = sender.view?.tag else { return }
         infoVC.product = product[tag]
         infoVC.photoScroll.tag = tag
-        print(product[tag].imageNames.count)
-       // infoVC.photoScroll.tag =
         navigationController?.pushViewController(infoVC, animated: true)
     }
 }

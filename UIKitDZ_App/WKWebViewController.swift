@@ -9,9 +9,9 @@ import UIKit
 import WebKit
 
 /// webView
-class WebViewController: UIViewController {
+final class WebViewController: UIViewController {
     
-    // MARK: Constants
+    // MARK: Visual Components
     private enum Constants {
         static let backButtonItem = UIBarButtonItem(systemItem: .rewind)
         static let forwardButtonItem = UIBarButtonItem(systemItem: .fastForward)
@@ -80,7 +80,6 @@ class WebViewController: UIViewController {
     }
     
     @objc private func loadProgressAction() {
-            
             loadProgressView.progress += 0.0005
         }
     
@@ -132,7 +131,8 @@ class WebViewController: UIViewController {
     
     private func createProgressView() {
         myProgressView.setProgress(0.5, animated: false)
-        observation = webView.observe(\.estimatedProgress, options: [.new]) { _, _ in
+        observation = webView.observe(\.estimatedProgress, options: [.new]) { [weak self] _, _ in
+            guard let self = self else { return }
             self.myProgressView.progress = Float(self.webView.estimatedProgress)
             if self.myProgressView.progress == 1.0 {
                 self.myProgressView.isHidden = true
@@ -185,16 +185,16 @@ extension WebViewController: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.showActivityIndicator(show: false)
+        showActivityIndicator(show: false)
         loadProgressView.progress += 1.0
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        self.createActivityIndicator()
-        self.showActivityIndicator(show: true)
+        createActivityIndicator()
+        showActivityIndicator(show: true)
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        self.showActivityIndicator(show: false)
+        showActivityIndicator(show: false)
     }
 }

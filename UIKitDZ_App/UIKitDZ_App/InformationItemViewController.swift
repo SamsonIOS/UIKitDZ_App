@@ -10,7 +10,7 @@ import UIKit
 /// Информация о товаре
 final class InformationItemViewController: UIViewController {
     
-    // MARK: Constants
+    // MARK: Visual Components
     private enum Constants {
         static let compatibilityTextLabel = "Совместимо с MacBook Pro - Евгений"
         static let firstInfoLabel = "Заказ сегодня в течении для, доставка:"
@@ -21,6 +21,14 @@ final class InformationItemViewController: UIViewController {
         static let addToLike = "heart"
         static let shareButton = "square.and.arrow.up"
         static let addToBagTextButton = "Добавить в корзину"
+    }
+    
+    private enum Url {
+        static let blackCaseUrl = "https://re-store.ru/catalog/P057-106-13/"
+        static let sportCaseUrl = "https://re-store.ru/catalog/MJ4V3ZM-A/"
+        static let leatherCaseUrl = "https://re-store.ru/catalog/NM7MDT0M00/"
+        static let airPodsCaseUrl = "https://re-store.ru/catalog/MLWK3/"
+        static let defaulUrl = "https://re-store.ru"
     }
     
     // MARK: Public properties
@@ -175,7 +183,7 @@ final class InformationItemViewController: UIViewController {
             height: 200)
         scroll.isPagingEnabled = true
         scroll.contentMode = .scaleAspectFit
-        scroll.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnImageView)))
+        scroll.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnImageViewAction)))
         return scroll
     }()
     
@@ -284,19 +292,19 @@ final class InformationItemViewController: UIViewController {
         }
     }
     
-    @objc private func tapOnImageView(sender: UITapGestureRecognizer) {
+    @objc private func tapOnImageViewAction(sender: UITapGestureRecognizer) {
         let newVC = WebViewController()
         switch photoScroll.tag {
         case 0:
-            newVC.url = "https://re-store.ru/catalog/P057-106-13/"
+            newVC.url = Url.blackCaseUrl
         case 1:
-            newVC.url = "https://re-store.ru/catalog/MJ4V3ZM-A/"
+            newVC.url = Url.sportCaseUrl
         case 2:
-            newVC.url = "https://re-store.ru/catalog/NM7MDT0M00/"
+            newVC.url = Url.leatherCaseUrl
         case 3:
-            newVC.url = "https://re-store.ru/catalog/MLWK3/"
+            newVC.url = Url.airPodsCaseUrl
         default:
-            newVC.url = "https://re-store.ru"
+            newVC.url = Url.defaulUrl
         }
         let navVC = UINavigationController(rootViewController: newVC)
         navVC.navigationController?.modalPresentationStyle = .fullScreen

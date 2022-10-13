@@ -10,7 +10,7 @@ import UIKit
 /// Экран с рекомендациями для пользователя
 final class ForUsViewController: UIViewController {
     
-    // MARK: Constants
+    // MARK: Visual Components
     private enum Constants {
         static let newText = "Вот что нового"
         static let air = "airpodsImage"
@@ -26,6 +26,8 @@ final class ForUsViewController: UIViewController {
         static let devices = "ваши устройства"
         static let showAll = "Показать все"
         static let userDefaultsImageName = "avatar"
+        static let forUsText = "checklist"
+        static let title = "Для вас"
         static let imageSizeForLargeState: CGFloat = 40
         static let imageRightMargin: CGFloat = 16
         static let imageBottomMarginForLargeState: CGFloat = 12
@@ -38,7 +40,7 @@ final class ForUsViewController: UIViewController {
     // MARK: Public properties
     lazy var iconImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "checklist")
+        image.image = UIImage(named: Constants.forUsText)
         image.layer.cornerRadius = Constants.imageSizeForLargeState / 2
         image.clipsToBounds = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(iconImageViewAction))
@@ -237,7 +239,7 @@ final class ForUsViewController: UIViewController {
     // MARK: Private Methods
     private func setView() {
         view.backgroundColor = .white
-        title = "Для вас"
+        title = Constants.title
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -251,8 +253,10 @@ final class ForUsViewController: UIViewController {
     
     private func loadFromUserDefaults() {
         let userDefaults = UserDefaults.standard
-        guard let data = userDefaults.object(forKey: Constants.userDefaultsImageName) as? Data else { return }
-        guard let image = UIImage(data: data) else { return }
+        guard
+            let data = userDefaults.object(forKey: Constants.userDefaultsImageName) as? Data,
+            let image = UIImage(data: data)
+        else { return }
         iconImageView.image = image
     }
     
@@ -343,6 +347,7 @@ private extension ForUsViewController {
     }
 }
 
+// MARK: Extension + UIImage
 extension UIImage {
     func resizeImage(to size: CGSize) -> UIImage {
         return UIGraphicsImageRenderer(size: size).image { _ in

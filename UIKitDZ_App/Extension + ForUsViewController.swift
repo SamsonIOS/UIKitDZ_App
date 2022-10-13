@@ -12,7 +12,7 @@ extension ForUsViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
-        self.iconImageView.image = image
+        iconImageView.image = image
         guard let imageData = image.pngData() else { return }
         saveUserDefaults(image: imageData)
         dismiss(animated: true)
