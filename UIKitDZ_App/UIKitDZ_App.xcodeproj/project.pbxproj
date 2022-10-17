@@ -16,6 +16,10 @@
 		338FAAB728F5946A00073B92 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338FAAB628F5946A00073B92 /* Product.swift */; };
 		338FAAB928F5DA7A00073B92 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338FAAB828F5DA7A00073B92 /* WKWebViewController.swift */; };
 		338FAABB28F71E4F00073B92 /* Extension + ForUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338FAABA28F71E4F00073B92 /* Extension + ForUsViewController.swift */; };
+		339495BB28F89FAA00774B1C /* StructPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339495BA28F89FAA00774B1C /* StructPageController.swift */; };
+		339495BD28F8A0E200774B1C /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339495BC28F8A0E200774B1C /* PageViewController.swift */; };
+		339C5B2D28F8A2310010D9E8 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C5B2C28F8A2310010D9E8 /* InfoViewController.swift */; };
+		339C5B2F28F96AF60010D9E8 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C5B2E28F96AF60010D9E8 /* TabBarViewController.swift */; };
 		33A8C61528EF4AA40010ECC7 /* InformationItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8C61428EF4AA40010ECC7 /* InformationItemViewController.swift */; };
 		33CD1ED628EEE08100447723 /* ForUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CD1ED528EEE08100447723 /* ForUsViewController.swift */; };
 		33CD1ED828EEE09500447723 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CD1ED728EEE09500447723 /* SearchViewController.swift */; };
@@ -34,6 +38,10 @@
 		338FAAB628F5946A00073B92 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		338FAAB828F5DA7A00073B92 /* WKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		338FAABA28F71E4F00073B92 /* Extension + ForUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + ForUsViewController.swift"; sourceTree = "<group>"; };
+		339495BA28F89FAA00774B1C /* StructPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructPageController.swift; sourceTree = "<group>"; };
+		339495BC28F8A0E200774B1C /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		339C5B2C28F8A2310010D9E8 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		339C5B2E28F96AF60010D9E8 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		33A8C61428EF4AA40010ECC7 /* InformationItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationItemViewController.swift; sourceTree = "<group>"; };
 		33CD1ED528EEE08100447723 /* ForUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForUsViewController.swift; sourceTree = "<group>"; };
 		33CD1ED728EEE09500447723 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +62,7 @@
 		3349831D28EDD63D00942AE5 = {
 			isa = PBXGroup;
 			children = (
+				339C5B2E28F96AF60010D9E8 /* TabBarViewController.swift */,
 				338FAABA28F71E4F00073B92 /* Extension + ForUsViewController.swift */,
 				338FAAB828F5DA7A00073B92 /* WKWebViewController.swift */,
 				338FAAB628F5946A00073B92 /* Product.swift */,
@@ -84,14 +93,25 @@
 			path = UIKitDZ_App;
 			sourceTree = "<group>";
 		};
+		339495B928F89F7D00774B1C /* PageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				339495BA28F89FAA00774B1C /* StructPageController.swift */,
+				339495BC28F8A0E200774B1C /* PageViewController.swift */,
+				339C5B2C28F8A2310010D9E8 /* InfoViewController.swift */,
+			);
+			name = PageViewController;
+			sourceTree = "<group>";
+		};
 		33CD1EDB28EEE0AB00447723 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				3349832D28EDD63E00942AE5 /* BuyViewController.swift */,
-				33CD1ED528EEE08100447723 /* ForUsViewController.swift */,
 				33CD1ED728EEE09500447723 /* SearchViewController.swift */,
 				33CD1ED928EEE0A500447723 /* BasketViewController.swift */,
 				33A8C61428EF4AA40010ECC7 /* InformationItemViewController.swift */,
+				33CD1ED528EEE08100447723 /* ForUsViewController.swift */,
+				339495B928F89F7D00774B1C /* PageViewController */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -191,6 +211,9 @@
 			files = (
 				33CD1EDA28EEE0A500447723 /* BasketViewController.swift in Sources */,
 				338FAAB728F5946A00073B92 /* Product.swift in Sources */,
+				339495BB28F89FAA00774B1C /* StructPageController.swift in Sources */,
+				339495BD28F8A0E200774B1C /* PageViewController.swift in Sources */,
+				339C5B2F28F96AF60010D9E8 /* TabBarViewController.swift in Sources */,
 				33A8C61528EF4AA40010ECC7 /* InformationItemViewController.swift in Sources */,
 				338FAAB928F5DA7A00073B92 /* WKWebViewController.swift in Sources */,
 				33CD1ED828EEE09500447723 /* SearchViewController.swift in Sources */,
@@ -199,6 +222,7 @@
 				33CD1ED628EEE08100447723 /* ForUsViewController.swift in Sources */,
 				338FAABB28F71E4F00073B92 /* Extension + ForUsViewController.swift in Sources */,
 				3349832C28EDD63E00942AE5 /* SceneDelegate.swift in Sources */,
+				339C5B2D28F8A2310010D9E8 /* InfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
