@@ -11,7 +11,7 @@ import UIKit
 final class InfoViewController: UIViewController {
 
     // MARK: Private Methods
-    private let pageImage: UIImageView = {
+    private let pageImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
         return view
@@ -39,24 +39,14 @@ final class InfoViewController: UIViewController {
         return label
     }()
     
-    private lazy var subView: [UIView] = [self.pageImage, self.firstLabel, self.secondLabel]
+    private lazy var subView: [UIView] = [self.pageImageView, self.firstLabel, self.secondLabel]
     
     // MARK: Init
     init(elements: ElementsPageControl) {
-        super.init(nibName: nil, bundle: nil)
-        view.backgroundColor = .black
-        edgesForExtendedLayout = []
-        
-        pageImage.image = elements.image
+        pageImageView.image = elements.image
         firstLabel.text = elements.firstLabel
         secondLabel.text = elements.secondLabel
-        
-        for view in subView { self.view.addSubview(view) }
-        
-        pageImage.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
-        firstLabel.center.x = view.center.x
-        secondLabel.center.x = view.center.x
-        
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -64,17 +54,42 @@ final class InfoViewController: UIViewController {
     }
     
     // MARK: Life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setView()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIView.animate(withDuration: 1) {
-            self.firstLabel.alpha = 1.0
-            self.secondLabel.alpha = 1.0
+        UIView.animate(withDuration: 1) { [self] in
+            animationsAppear()
         }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.firstLabel.alpha = 0.0
-        self.secondLabel.alpha = 0.0
+        animationsDisappear()
     }
+    
+    private func setView() {
+        view.backgroundColor = .black
+        edgesForExtendedLayout = []
+        
+        for view in subView { self.view.addSubview(view) }
+        
+        pageImageView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        firstLabel.center.x = view.center.x
+        secondLabel.center.x = view.center.x
+    }
+    
+    private func animationsDisappear() {
+        firstLabel.alpha = 0.0
+        secondLabel.alpha = 0.0
+    }
+    
+    private func animationsAppear() {
+        self.firstLabel.alpha = 1.0
+        self.secondLabel.alpha = 1.0
+    }
+    
 }

@@ -11,41 +11,44 @@ import UIKit
 final class PageViewController: UIPageViewController {
     
     // MARK: Visual Components
+    private enum User {
+        static let userKey = "user"
+    }
     private enum  FirstPageElements {
-        static let firstLabel = "Track Your Cycle"
-        static let secondLabel = "Manage irregular period and learnd how to improve your period."
-        static let pageImage = UIImage(named: "1")
+        static let firstLabelText = "Track Your Cycle"
+        static let secondLabelText = "Manage irregular period and learnd how to improve your period."
+        static let pageImageName = UIImage(named: "1")
     }
     
     private enum  SecondPageElements {
-        static let firstLabel = "Plan Your Pregnancy"
-        static let secondLabel = "Favorable days are important. Vestibulum rutrum quam vitac fringila  tincidunt."
-        static let pageImage = UIImage(named: "2-1")
+        static let firstLabelText = "Plan Your Pregnancy"
+        static let secondLabelText = "Favorable days are important. Vestibulum rutrum quam vitac fringila  tincidunt."
+        static let pageImageName = UIImage(named: "2-1")
     }
     
     private enum  ThirdPageElements {
-        static let firstLabel = "Daily Health Insight"
-        static let secondLabel = "Personal healt insight. Vestibulum rutrum quam vitae frimgilla tincidunt."
-        static let pageImage = UIImage(named: "3")
+        static let firstLabelText = "Daily Health Insight"
+        static let secondLabelText = "Personal healt insight. Vestibulum rutrum quam vitae frimgilla tincidunt."
+        static let pageImageName = UIImage(named: "3")
     }
     
-    private enum TitleForButton {
+    private enum TitleFor {
         static let skipButton = "SKIP"
         static let nextButton = "NEXT"
         static let getStartedButton = "GET STARTED!"
     }
     
     // MARK: Private properties
-    private let firstPhoto = FirstPageElements.pageImage
-    private let secondPhoto = SecondPageElements.pageImage
-    private let thredPhoto = ThirdPageElements.pageImage
+    private let firstPhoto = FirstPageElements.pageImageName
+    private let secondPhoto = SecondPageElements.pageImageName
+    private let thredPhoto = ThirdPageElements.pageImageName
     private var elementsOfPageVC: [ElementsPageControl] = [ElementsPageControl]()
     private var pageControlAppearance = UIPageControl.appearance(whenContainedInInstancesOf: [PageViewController.self])
     
     private lazy var skipButton: UIButton = {
         let button = UIButton(frame: CGRect(
             x: 95, y: 831, width: 50, height: 40))
-        button.setTitle(TitleForButton.skipButton, for: .normal)
+        button.setTitle(TitleFor.skipButton, for: .normal)
         button.setTitleColor(UIColor.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(getStartedAction(sender:)), for: .touchUpInside)
         return button
@@ -54,7 +57,7 @@ final class PageViewController: UIPageViewController {
     private lazy var nextButton: UIButton = {
         let button = UIButton(frame: CGRect(
             x: 270, y: 831, width: 50, height: 40))
-        button.setTitle(TitleForButton.nextButton, for: .normal)
+        button.setTitle(TitleFor.nextButton, for: .normal)
         button.setTitleColor(UIColor.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(nextPageAction(sender:)), for: .touchUpInside)
         return button
@@ -63,7 +66,7 @@ final class PageViewController: UIPageViewController {
     private lazy var getStartedButton: UIButton = {
         let button = UIButton(frame: CGRect(
             x: 0, y: 831, width: 150, height: 40))
-        button.setTitle(TitleForButton.getStartedButton, for: .normal)
+        button.setTitle(TitleFor.getStartedButton, for: .normal)
         button.isHidden = true
         button.backgroundColor = .white
         button.center.x = view.center.x
@@ -85,10 +88,6 @@ final class PageViewController: UIPageViewController {
                   navigationOrientation: UIPageViewController.NavigationOrientation,
                   options: [UIPageViewController.OptionsKey: Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: navigationOrientation, options: nil)
-        self.view.backgroundColor = .white
-        self.dataSource = self
-        self.delegate = self
-        setViewControllers([pages[0]], direction: .forward, animated: true, completion: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -108,7 +107,7 @@ final class PageViewController: UIPageViewController {
         present(tabBarVC, animated: true)
         
         let userDefaults = UserDefaults.standard
-        userDefaults.set(1, forKey: "user")
+        userDefaults.set(1, forKey: User.userKey)
     }
     
     @objc private func nextPageAction(sender: UIButton) {
@@ -137,23 +136,31 @@ final class PageViewController: UIPageViewController {
         pageControlAppearance.pageIndicatorTintColor = .tertiaryLabel
         pageControlAppearance.currentPageIndicatorTintColor = .systemBlue
         addElementsInPage()
+        setView()
+    }
+    
+    private func setView() {
+        view.backgroundColor = .white
+        self.dataSource = self
+        self.delegate = self
+        setViewControllers([pages[0]], direction: .forward, animated: true, completion: nil)
     }
     
     private func addElementsInPage() {
         let firstPageVC = ElementsPageControl(
-            firstLabel: FirstPageElements.firstLabel,
-            secondLabel: FirstPageElements.secondLabel,
+            firstLabel: FirstPageElements.firstLabelText,
+            secondLabel: FirstPageElements.secondLabelText,
             image: firstPhoto ?? UIImage())
         
         let secondsPageVC = ElementsPageControl(
-            firstLabel: SecondPageElements.firstLabel,
-            secondLabel: SecondPageElements.secondLabel,
-            image: SecondPageElements.pageImage ?? UIImage())
+            firstLabel: SecondPageElements.firstLabelText,
+            secondLabel: SecondPageElements.secondLabelText,
+            image: SecondPageElements.pageImageName ?? UIImage())
         
         let thridPageVC = ElementsPageControl(
-            firstLabel: ThirdPageElements.firstLabel,
-            secondLabel: ThirdPageElements.secondLabel,
-            image: ThirdPageElements.pageImage ?? UIImage())
+            firstLabel: ThirdPageElements.firstLabelText,
+            secondLabel: ThirdPageElements.secondLabelText,
+            image: ThirdPageElements.pageImageName ?? UIImage())
         
         elementsOfPageVC.append(firstPageVC)
         elementsOfPageVC.append(secondsPageVC)
